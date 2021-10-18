@@ -1,0 +1,17 @@
+
+name: event
+
+on:
+  pull_request_target:
+    types: [closed]
+  pull_request:
+    types: [closed]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: ${{ github.event_name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Event data
+        run: cat "${{ github.event_path }}"
