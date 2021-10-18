@@ -17,7 +17,7 @@ jobs:
       - name: Get commit info
         run: |
           echo "${{ github.token }}" | gh auth login --with-token
-          issue_timeline_url="$(cat "${{ github.event_path }}" | jq -r .issue_url)/timeline"
+          issue_timeline_url="$(jq -r .pull_request.issue_url "${{ github.event_path }}")/timeline"
           echo "issue_timeline_url=$issue_timeline_url"
           issue_timeline="$(gh api "$issue_timeline_url")"
           echo "$issue_timeline" | jq -r .commit_id
