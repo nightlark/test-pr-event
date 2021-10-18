@@ -20,6 +20,6 @@ jobs:
           issue_timeline_url="$(jq -r .pull_request.issue_url "${{ github.event_path }}")/timeline"
           echo "issue_timeline_url=$issue_timeline_url"
           issue_timeline="$(gh api "$issue_timeline_url")"
-          echo "$issue_timeline" | jq -r .commit_id
-          echo "$issue_timeline" | jq -r .commit_url
+          echo "$issue_timeline" | jq -r .[-1].commit_id
+          echo "$issue_timeline" | jq -r .[-1].commit_url
           
