@@ -16,7 +16,7 @@ jobs:
         run: cat "${{ github.event_path }}"
       - name: Get commit info
         run: |
-          echo "${{ github.token }}" | gh auth login --with-token
+          echo "${{ github.token }}" | gh auth login --hostname github.com --with-token
           issue_timeline_url="$(jq -r .issue_url "${{ github.event_path }}")/timeline"
           issue_timeline=$(gh api issue_timeline_url)
           echo "$issue_timeline" | jq -r .commit_id
