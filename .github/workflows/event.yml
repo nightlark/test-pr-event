@@ -17,6 +17,7 @@ jobs:
       - name: Get commit info
         run: |
           echo "${{ github.token }}" | gh auth login --with-token
+          # the issue url can be null, when closed in the web ui.. that needs to get handled properly
           issue_timeline_url="$(jq -r .issue_url "${{ github.event_path }}")/timeline"
           echo "issue_timeline_url=$issue_timeline_url"
           issue_timeline="$(gh api "$issue_timeline_url")"
